@@ -18,7 +18,7 @@ class GameWindow(QWidget):
         """Init."""
         super().__init__()
         self.setWindowTitle("Number Guessing Game")
-        self.setGeometry(100, 100, 340, 350)
+        self.setWindowIcon(QtGui.QIcon('numbers.png'))
         self.UiComponents()
         self.number = 0
         self.max_number = list_info[0]

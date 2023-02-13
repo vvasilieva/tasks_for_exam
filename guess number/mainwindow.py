@@ -1,6 +1,7 @@
 """Module for main window."""
-
-from PyQt5.QtCore import Qt
+from PyQt5 import QtGui
+from PyQt5.QtCore import Qt, QRegExp
+from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
 
 from ui_mainwindow import Ui_MainWindow
@@ -16,6 +17,7 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setWindowTitle("Number Guessing Game")
+        self.setWindowIcon(QtGui.QIcon('numbers.png'))
 
         self.info_level = {'light': [20, 10], 'middle': [500, 15], 'hard': [1000, 30]}
         self.set_enabled(False)
@@ -31,6 +33,10 @@ class MainWindow(QMainWindow):
         self.ui.middleLevel.stateChanged.connect(self.uncheck)
         self.ui.hardLevel.stateChanged.connect(self.uncheck)
         self.ui.userLevel.stateChanged.connect(self.uncheck)
+
+        rx = QRegExp('\d+')
+        self.ui.maxNumber.setValidator(QRegExpValidator(rx))
+        self.ui.maxAttempts.setValidator(QRegExpValidator(rx))
 
     def close_window(self):
         """Method for closing window."""
